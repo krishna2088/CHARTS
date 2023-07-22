@@ -9,21 +9,60 @@ export class AppComponent {
   title = 'angular-charts-youtube';
 
 
-  lineChart=new Chart({
+  columnChart=new Chart({
     chart: {
-      type: 'line'
+      type: 'column'
     },
     title: {
-      text: 'Patients'
+      text: 'Placement Graph'
     },
     credits: {
       enabled: false
     },
+    xAxis: {
+      categories: [
+        '2022',
+        '2021',
+        '2020',
+        '2019',
+        '2018'
+      ],
+      crosshair: true
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Number of student'
+      }
+    },
+    tooltip: {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+      footerFormat: '</table>',
+      shared: true,
+      useHTML: true
+    },
+    plotOptions: {
+      column: {
+        pointPadding: 0.2,
+        borderWidth: 0
+      }
+    },
     series: [
-      {
-        name: 'Patients admitted',
-        data: [10, 2, 3,6,9,17,20,10,5,2,16]
-      } as any
+     {
+      type: 'column',
+      name: 'Total Students',
+      color: '#F07923',
+      data: [50, 65, 35, 55, 45]
+  
+    }, {
+      type: 'column',
+      name: 'Student Placed',
+      color: '#3AF02B',
+      data: [32, 46, 20, 35, 24]
+  
+    }
     ]
 
   })
@@ -34,46 +73,53 @@ export class AppComponent {
       plotShadow: false,
     },
   
-    credits: {
-      enabled: false,
+    title: {
+      text: 'Student Course Assignment, 2022' 
+      //align: 'left'
     },
-  
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%'
+      }
+    },
     plotOptions: {
       pie: {
-        innerSize: '99%',
-        borderWidth: 10,
-        borderColor: '',
-        slicedOffset: 10,
+        allowPointSelect: true,
+        cursor: 'pointer',
         dataLabels: {
-          connectorWidth: 0,
-        },
-      },
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+        }
+      }
     },
-  
-    title: {
-      verticalAlign: 'middle',
-      floating: true,
-      text: 'Diseases',
-    },
-  
-    legend: {
-      enabled: false,
-    },
-  
-    series: [
-      {
-        type: 'pie',
-        data: [
-          { name: 'COVID 19', y: 1, color: '#eeeeee' },
-  
-          { name: 'HIV/AIDS', y: 2, color: '#393e46' },
-  
-          { name: 'EBOLA', y: 3, color: '#00adb5' },
-          { name: 'DISPORA', y: 4, color: '#eeeeee' },
-          { name: 'DIABETES', y: 5, color: '#506ef9' },
-        ],
-      },
-    ],
+    series: [{
+      type: 'pie',
+      name: 'Brands',
+      data: [{
+        name: 'Basic',
+        y: 25,
+        sliced: true,
+        selected: true
+      }, {
+        name: 'Accessibility',
+        y: 20
+      },  {
+        name: 'Web Development',
+        y: 15
+      }, {
+        name: 'Data Management',
+        y: 10
+      }, {
+        name: 'Networking',
+        y: 25
+      }, {
+        name: 'Other',
+        y: 5
+      }]
+    }]
   })
 }
 
